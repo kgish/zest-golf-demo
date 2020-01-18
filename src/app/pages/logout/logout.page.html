@@ -1,0 +1,17 @@
+<app-header [title]="title"></app-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>Subtitle</ion-card-subtitle>
+            <ion-card-title>Title</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <p>Are you sure you want to logout?</p>
+            <ion-button expand="full" (click)="logout()">Yes</ion-button>
+            <ion-button expand="full" (click)="cancel()">Cancel</ion-button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+
+<app-footer></app-footer>

@@ -24,3 +24,22 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-footer {
+  ion-title {
+    font-size: small;
+    text-align: center;
+  }
+}
+
+ion-card-content p {
+  margin-bottom: 1rem;
+}
+
+ion-button {
+  margin-bottom: 0.5rem;
+}
+
+ion-button:last-child {
+  margin-bottom: revert;
+}
