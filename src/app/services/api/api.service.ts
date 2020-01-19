@@ -1,25 +1,27 @@
 import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
-import * as dotenv from 'dotenv';
+import { environment } from '../../../environments/environment';
 
-dotenv.config();
+interface IResult<T> {
+    success: boolean;
+    data: T[];
+}
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
 
-    url: string;
-    username: string;
-    password: string;
-
-    constructor() {
-        this.url = process.env.API_URL;
-        this.username = process.env.API_USERNAME;
-        this.password = process.env.API_PASSWORD;
+    constructor(private http: HttpClient) {
     }
 
-    countries() {
-
+    countries(): Observable<string[]> {
+        const url = environment.apiUrl + '/countries';
+        return this.http.get(url).pipe(
+            map((x: IResult<string>) => x.data)
+        );
     }
 }

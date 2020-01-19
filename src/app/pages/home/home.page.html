@@ -4,11 +4,10 @@
     <ion-card class="home-card">
         <img src="/assets/images/logo.jpg" alt=""/>
         <ion-card-header>
-            <ion-card-subtitle>Get Started</ion-card-subtitle>
-            <ion-card-title>Welcome {{name}}</ion-card-title>
+            <ion-card-title>Choose a country.</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <p>What would you like to do today?</p>
+            <ion-button *ngFor="let country of countries" (click)="onClick(country)">{{country}}</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>

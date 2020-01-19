@@ -60,6 +60,7 @@
       true,
       "single"
     ],
+    "semicolon": [true, "always"],
     "trailing-comma": false,
     "no-output-on-prefix": true,
     "no-inputs-metadata-property": true,

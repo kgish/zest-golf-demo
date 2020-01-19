@@ -1,23 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth';
+import {Component, OnInit} from '@angular/core';
+
+import {ApiService} from '../../services';
 
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
-    styleUrls: [ 'home.page.scss' ],
+    styleUrls: ['home.page.scss']
 })
 export class HomePage implements OnInit {
 
-    name: string;
+    countries: string[];
 
-    constructor(private auth: AuthService) {
+    constructor(private api: ApiService) {
     }
 
     ngOnInit(): void {
-        const currentUser = this.auth.getCurrentUser();
-        this.name = currentUser ? (currentUser.firstName || currentUser.username ) : '';
+        this.api.countries().subscribe(countries => this.countries = countries);
     }
+
     get title() {
         return 'Home';
+    }
+
+    onClick(country: string): void {
+
     }
 }
