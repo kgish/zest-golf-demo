@@ -10,7 +10,7 @@
             <ion-list>
                 <ion-item>
                     <ion-label>Connected facilities</ion-label>
-                    <ion-checkbox checked (ionChange)="toggleFacilities($event)"></ion-checkbox>
+                    <ion-checkbox (ionChange)="toggleFacilities($event)"></ion-checkbox>
                 </ion-item>
             </ion-list>
             <ion-button *ngFor="let country of countries" (click)="onClick(country)">{{country}}</ion-button>

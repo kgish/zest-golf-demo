@@ -1,11 +1,26 @@
-<app-header [title]="title"></app-header>
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{ title }}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
 
 <ion-content>
     <ion-card class="home-card">
         <ion-card-header>
-            <ion-card-title>Choose a golf course.</ion-card-title>
+            <ion-card-title>Choose a facility.</ion-card-title>
         </ion-card-header>
         <ion-card-content>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Connected facilities</ion-label>
+                    <ion-checkbox (ionChange)="toggleFacilities($event)"></ion-checkbox>
+                </ion-item>
+            </ion-list>
             <ion-button *ngFor="let facility of facilities" (click)="onClick(facility)">{{facility.name}}</ion-button>
         </ion-card-content>
     </ion-card>

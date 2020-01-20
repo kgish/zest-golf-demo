@@ -16,7 +16,7 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.api.countries(true).subscribe(countries => this.countries = countries);
+        this.api.countries().subscribe(countries => this.countries = countries);
     }
 
     get title() {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IFacility } from '../../services/api/api.models';
-import { ApiService } from "../../services/api";
+import { ApiService } from '../../services/api';
 
 @Component({
     selector: 'app-country',
@@ -20,7 +20,11 @@ export class CountryPage implements OnInit {
     ngOnInit() {
         const id = this.route.snapshot.paramMap.get('id');
         this.title = id;
-        this.api.facilities(id).subscribe(facilities => this.facilities = facilities);
+        this.api.facilities(this.title).subscribe(facilities => this.facilities = facilities);
+    }
+
+    toggleFacilities($event: CustomEvent) {
+        this.api.facilities(this.title, $event.detail.checked).subscribe(facilities => this.facilities = facilities);
     }
 
     onClick(facility: IFacility) {
