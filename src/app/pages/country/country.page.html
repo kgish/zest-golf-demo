@@ -4,13 +4,13 @@
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>
-            {{ title }}
+            {{ country }}
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="home-card">
+    <ion-card>
         <ion-card-header>
             <ion-card-title>Choose a facility.</ion-card-title>
         </ion-card-header>
@@ -21,7 +21,7 @@
                     <ion-checkbox (ionChange)="toggleFacilities($event)"></ion-checkbox>
                 </ion-item>
             </ion-list>
-            <ion-button *ngFor="let facility of facilities" (click)="onClick(facility)">{{facility.name}}</ion-button>
+            <ion-button *ngFor="let facility of facilities" size='small' (click)="onClick(facility)">{{facility.name}}</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>

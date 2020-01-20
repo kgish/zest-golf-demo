@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{ title }}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card *ngIf="facility">
+        <ion-card-header>
+            <ion-card-title>{{facility.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <pre>{{facility | json }}</pre>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+
+<app-footer></app-footer>

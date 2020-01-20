@@ -13,18 +13,6 @@ export class HelpPage implements OnInit {
     ngOnInit() {
     }
 
-    callSupport() {
-
-    }
-
-    createTicket() {
-
-    }
-
-    documentation() {
-
-    }
-
     get title() {
         return 'Help';
     }
