@@ -1,9 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>country</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="title"></app-header>
 
 <ion-content>
-
+    <ion-card class="home-card">
+        <ion-card-header>
+            <ion-card-title>Choose a golf course.</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-button *ngFor="let facility of facilities" (click)="onClick(facility)">{{facility.name}}</ion-button>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
+
+<app-footer></app-footer>

@@ -4,17 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { SharedModule } from '../../shared/shared.module';
 import { CountryPageRoutingModule } from './country-routing.module';
 
 import { CountryPage } from './country.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    CountryPageRoutingModule
-  ],
-  declarations: [CountryPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        CountryPageRoutingModule,
+        SharedModule
+    ],
+    declarations: [ CountryPage ]
 })
-export class CountryPageModule {}
+export class CountryPageModule {
+}
