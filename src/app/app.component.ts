@@ -80,6 +80,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 page.when.includes(currentUser ? 'logged-in' : 'logged-out')
             )
         ));
+        this.auth.remember();
     }
 
     ngOnDestroy(): void {

@@ -20,6 +20,7 @@ export class LoginPage implements OnInit {
         this.form = this.formBuilder.group({
             username: [ '', [ Validators.required, Validators.minLength(5) ] ],
             password: [ '', [ Validators.required, Validators.minLength(5) ] ],
+            remember: false
         });
     }
 

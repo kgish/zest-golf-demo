@@ -18,8 +18,8 @@ export class ApiService {
     constructor(private http: HttpClient) {
     }
 
-    countries(): Observable<string[]> {
-        const url = environment.apiUrl + '/countries';
+    countries(connected: boolean = false): Observable<string[]> {
+        const url = environment.apiUrl + '/countries' + (connected ? '?connected=true' : '');
         return this.http.get(url).pipe(
             map((x: IResult<string>) => x.data)
         );
