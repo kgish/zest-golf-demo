@@ -34,7 +34,7 @@ export class ApiService {
     facilities(country: string, connected: boolean = false): Observable<IFacility[]> {
         const url = environment.apiUrl + '/facilities?country=' + encodeURIComponent(country) + (connected ? '&connected=true' : '');
         return this.http.get(url).pipe(
-            map((x: IResults<IFacility>) => x.data.sort())
+            map((x: IResults<IFacility>) => x.data.sort((a, b) => a.name === b.name ? 0 : (a.name > b.name ? 0 : -1)))
         );
     }
 

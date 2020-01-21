@@ -45,14 +45,3 @@ export interface IFacility {
     logo?: string;
     images?: string[];
 }
-
-interface IDetail {
-    latitude: number;
-    longitude: number;
-    phoneNumber: string;
-    foundedIn: number;
-    description: string;
-    services: IServices;
-    logo: string;
-    images: string[];
-}

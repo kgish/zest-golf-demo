@@ -22,10 +22,16 @@ export class FacilityPage implements OnInit {
 
     ngOnInit() {
         const id = this.route.snapshot.paramMap.get('id');
-        this.api.facility(id, true).subscribe(facility => this.facility = facility);
+        this.api.facility(id, true).subscribe(facility => this._init(facility));
     }
 
     get title() {
         return 'Facility';
+    }
+
+    // Private
+
+    private _init(facility: IFacility) {
+        this.facility = facility;
     }
 }
