@@ -21,7 +21,7 @@
                     <ion-checkbox (ionChange)="toggleFacilities($event)"></ion-checkbox>
                 </ion-item>
             </ion-list>
-            <ion-button *ngFor="let facility of facilities" size='small' (click)="onClick(facility)">{{facility.name}}</ion-button>
+            <ion-button *ngFor="let facility of facilities" size='small' (click)="onClick(facility)">{{facility.id}}. {{facility.name}}</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>

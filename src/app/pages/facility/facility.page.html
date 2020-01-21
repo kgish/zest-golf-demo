@@ -13,6 +13,7 @@
     <ion-card>
         <ion-card-header>
             <ion-card-title>{{facility.name}}</ion-card-title>
+            <ion-button size="small" (click)="onClick()">Teetimes</ion-button>
             <div *ngIf="facility.address.address1">
                 <div>
                     {{ facility.address.address1 }} {{ facility.address.number }} {{ facility.address.addition }}

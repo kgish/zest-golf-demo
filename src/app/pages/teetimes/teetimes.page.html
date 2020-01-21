@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="teetimes">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Title</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+        <span *ngIf="teetimes.length">Found {{teetimes.length}} teetimes.</span>
+      <span *ngIf="!teetimes.length">No teetimes found.</span>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<app-footer></app-footer>

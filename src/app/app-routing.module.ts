@@ -42,6 +42,10 @@ const routes: Routes = [
     {
         path: 'facility/:id',
         loadChildren: () => import('./pages/facility/facility.module').then(m => m.FacilityPageModule)
+    },
+    {
+        path: 'teetimes/:id',
+        loadChildren: () => import('./pages/teetimes/teetimes.module').then(m => m.TeetimesPageModule)
     }
 ];
 

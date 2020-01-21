@@ -25,6 +25,10 @@ export class FacilityPage implements OnInit {
         this.api.facility(id, true).subscribe(facility => this._init(facility));
     }
 
+    onClick() {
+        this.router.navigate([ '/teetimes', this.facility.id ]);
+    }
+
     get title() {
         return 'Facility';
     }

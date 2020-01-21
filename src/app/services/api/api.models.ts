@@ -45,3 +45,25 @@ export interface IFacility {
     logo?: string;
     images?: string[];
 }
+
+type Holes = 9 | 18;
+type Players = '1' | '2' | '3' | '4';
+
+export interface IPrice {
+    amount: number;
+    currency: string;
+}
+
+export interface IPricing {
+    players: Players;
+    price: IPrice;
+}
+
+export interface ITeetime {
+    id: number;
+    time: string;
+    round: string;
+    holes: Holes;
+    players: number;
+    pricing: IPricing[];
+}

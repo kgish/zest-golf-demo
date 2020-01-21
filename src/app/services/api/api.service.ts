@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
-import { IFacility } from './api.models';
+import { IFacility, ITeetime } from './api.models';
 
 interface IResult<T> {
     success: boolean;
@@ -42,6 +42,13 @@ export class ApiService {
         const url = environment.apiUrl + '/facilities/' + (details ? 'details/' : '') + id;
         return this.http.get(url).pipe(
             map((x: IResult<IFacility>) => x.data)
+        );
+    }
+
+    teetimes(facilityId: number): Observable<ITeetime[]> {
+        const url = environment.apiUrl + '/teetimes/' + facilityId;
+        return this.http.get(url).pipe(
+            map((x: IResults<ITeetime>) => x.data.sort((a, b) => a.time === b.time ? 0 : (a.time > b.time ? 0 : -1)))
         );
     }
 }
