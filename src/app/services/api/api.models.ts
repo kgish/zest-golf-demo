@@ -46,8 +46,8 @@ export interface IFacility {
     images?: string[];
 }
 
-type Holes = 9 | 18;
-type Players = '1' | '2' | '3' | '4';
+export type Holes = 9 | 18;
+export type Players = '1' | '2' | '3' | '4';
 
 export interface IPrice {
     amount: number;

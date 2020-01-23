@@ -5,33 +5,34 @@ import { ITeetime } from '../../services/api/api.models';
 import { ApiService } from '../../services/api';
 
 @Component({
-  selector: 'app-teetimes',
-  templateUrl: './teetimes.page.html',
-  styleUrls: [ './teetimes.page.scss' ],
+    selector: 'app-teetimes',
+    templateUrl: './teetimes.page.html',
+    styleUrls: [ './teetimes.page.scss' ],
 })
 export class TeetimesPage implements OnInit {
 
-  teetimes: ITeetime[] = [];
+    teetimes: ITeetime[] = [];
 
-  constructor(
-      private route: ActivatedRoute,
-      private api: ApiService,
-      private router: Router
-  ) {
-  }
+    constructor(
+        private route: ActivatedRoute,
+        private api: ApiService,
+        private router: Router
+    ) {
+    }
 
-  ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.api.teetimes(id).subscribe(teetimes => this._init(teetimes));
-  }
+    ngOnInit() {
+        const id = +this.route.snapshot.paramMap.get('id');
+        this.api.teetimes(id).subscribe(teetimes => this._init(teetimes), error => console.error(error));
+    }
 
-  get title() {
-    return 'Teetimes';
-  }
+    get title() {
+        return 'Teetimes';
+    }
 
-  // Private
+    // Private
 
-  private _init(teetimes: ITeetime[]) {
-    this.teetimes = teetimes;
-  }
+    private _init(teetimes: ITeetime[]) {
+        console.log(teetimes);
+        this.teetimes = teetimes;
+    }
 }

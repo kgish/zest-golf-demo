@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
-import { IFacility, ITeetime } from './api.models';
+import { Holes, IFacility, ITeetime, Players } from './api.models';
 
 interface IResult<T> {
     success: boolean;
@@ -45,8 +45,12 @@ export class ApiService {
         );
     }
 
-    teetimes(facilityId: number): Observable<ITeetime[]> {
-        const url = environment.apiUrl + '/teetimes/' + facilityId;
+    teetimes(facilityId: number, bookingDate: Date = new Date(), players: Players = '2', holes: Holes = 18): Observable<ITeetime[]> {
+        const dd =
+            bookingDate.getDate().toString().padStart(2, '0') + '-' +
+            (bookingDate.getMonth() + 1).toString().padStart(2, '0') + '-' +
+            bookingDate.getFullYear();
+        const url = environment.apiUrl + '/teetimes/' + facilityId + `/?bookingDate=${dd}&players=${players}&holes=${holes}`;
         return this.http.get(url).pipe(
             map((x: IResults<ITeetime>) => x.data.sort((a, b) => a.time === b.time ? 0 : (a.time > b.time ? 0 : -1)))
         );
