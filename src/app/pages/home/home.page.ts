@@ -16,14 +16,14 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit(): void {
-        this.api.countries().subscribe(countries => this.countries = countries);
+        this.api.countries(true).subscribe(countries => this.countries = countries);
     }
 
     get title() {
         return 'Home';
     }
 
-    toggleFacilities($event: CustomEvent) {
+    toggleConnected($event: CustomEvent) {
         this.api.countries($event.detail.checked).subscribe(countries => this.countries = countries);
     }
 

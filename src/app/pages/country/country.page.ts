@@ -22,13 +22,12 @@ export class CountryPage implements OnInit {
     }
 
     ngOnInit() {
-        const id = this.route.snapshot.paramMap.get('id');
-        this.country = id;
-        this.api.facilities(this.country).subscribe(facilities => this.facilities = facilities);
+        this.country = this.route.snapshot.paramMap.get('id');
+        this._getFacilities(true);
     }
 
-    toggleFacilities($event: CustomEvent) {
-        this.api.facilities(this.country, $event.detail.checked).subscribe(facilities => this.facilities = facilities);
+    toggleConnected($event: CustomEvent) {
+        this._getFacilities($event.detail.checked);
     }
 
     onClick(facility: IFacility) {
@@ -37,5 +36,11 @@ export class CountryPage implements OnInit {
 
     get title() {
         return this.country;
+    }
+
+    // Private
+
+    _getFacilities(connected: boolean) {
+        this.api.facilities(this.country, connected).subscribe(facilities => this.facilities = facilities);
     }
 }

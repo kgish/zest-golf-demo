@@ -12,6 +12,7 @@ import { ApiService } from '../../services/api';
 export class TeetimesPage implements OnInit {
 
     teetimes: ITeetime[] = [];
+    date: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -21,18 +22,20 @@ export class TeetimesPage implements OnInit {
     }
 
     ngOnInit() {
-        const id = +this.route.snapshot.paramMap.get('id');
-        this.api.teetimes(id).subscribe(teetimes => this._init(teetimes), error => console.error(error));
+        const facilityId = +this.route.snapshot.paramMap.get('id');
+        this.api.teetimes(facilityId).subscribe(teetimes => {
+            this.teetimes = teetimes;
+            if (teetimes && teetimes.length) {
+                this.date = teetimes[0].time.substr(0, 10);
+            }
+        });
     }
 
     get title() {
         return 'Teetimes';
     }
 
-    // Private
+    onClick(teetime: ITeetime) {
 
-    private _init(teetimes: ITeetime[]) {
-        console.log(teetimes);
-        this.teetimes = teetimes;
     }
 }

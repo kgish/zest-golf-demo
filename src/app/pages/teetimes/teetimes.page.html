@@ -12,11 +12,19 @@
 <ion-content *ngIf="teetimes">
     <ion-card>
         <ion-card-header>
-            <ion-card-title>Title</ion-card-title>
+            <ion-card-title>{{date}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <span *ngIf="teetimes.length">Found {{teetimes.length}} teetimes.</span>
             <span *ngIf="!teetimes.length">No teetimes found.</span>
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngIf="teetimes.length">
+        <ion-card-header>
+            <ion-card-title>Choose a teetime</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-button *ngFor="let teetime of teetimes" size='small' (click)="onClick(teetime)">{{teetime.time.substr(-8, 5)}}</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>
