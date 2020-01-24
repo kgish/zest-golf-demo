@@ -12,7 +12,21 @@
 <ion-content *ngIf="teetimes">
     <ion-card>
         <ion-card-header>
-            <ion-card-title><ion-button></ion-button><ion-button></ion-button>{{date}}</ion-card-title>
+            <ion-card-title>
+                <ion-toolbar>
+                    <ion-buttons slot="start">
+                        <ion-button color="primary" size="small" (click)="setDate(-1)">
+                            <ion-icon name="arrow-dropleft-circle"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                    <div class="centered">{{bookingDate | date }}</div>
+                    <ion-buttons slot="end">
+                        <ion-button color="primary" size="small" (click)="setDate(1)">
+                            <ion-icon name="arrow-dropright-circle"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <span *ngIf="teetimes.length">Found {{teetimes.length}} teetimes.</span>
@@ -24,7 +38,8 @@
             <ion-card-title>Choose a teetime</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <ion-button *ngFor="let teetime of teetimes" size='small' (click)="onClick(teetime)">{{teetime.time.substr(-8, 5)}}</ion-button>
+            <ion-button *ngFor="let teetime of teetimes" size="small"
+                        (click)="clickTeetime(teetime)">{{teetime.time.substr(-8, 5)}}</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>

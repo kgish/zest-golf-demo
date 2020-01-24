@@ -12,8 +12,14 @@
 <ion-content *ngIf="facility">
     <ion-card>
         <ion-card-header>
-            <ion-card-title>{{facility.name}}</ion-card-title>
-            <ion-button size="small" (click)="onClick()">Teetimes</ion-button>
+            <ion-card-title>
+                <ion-toolbar>
+                    {{facility.name}}
+                    <ion-buttons slot="end">
+                        <ion-button color="primary" size="small" (click)="onClick()">Teetimes</ion-button>
+                    </ion-buttons>
+                </ion-toolbar>
+            </ion-card-title>
             <div *ngIf="facility.address.address1">
                 <div>
                     {{ facility.address.address1 }} {{ facility.address.number }} {{ facility.address.addition }}
