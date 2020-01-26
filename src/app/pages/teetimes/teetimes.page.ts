@@ -80,6 +80,10 @@ export class TeetimesPage implements OnInit, OnDestroy {
         this._resetParams();
     }
 
+    clickShift(shift: string) {
+
+    }
+
     // Private
 
     private _resetParams() {

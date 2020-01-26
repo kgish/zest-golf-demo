@@ -11,29 +11,20 @@
 
 <ion-content *ngIf="teetimes">
     <ion-card>
-        <ion-card-header>
-            <ion-card-title>
-                Choose a teetime.
-                <ion-toolbar>
+        <ion-card-content>
+            <ion-list>
+                <ion-item>
                     <ion-buttons slot="start">
                         <ion-button color="primary" size="small" (click)="changeDate(-1)">
                             <ion-icon name="arrow-dropleft-circle"></ion-icon>
                         </ion-button>
                     </ion-buttons>
-                    <div class="centered">{{bookingDate | date }}</div>
+                    <ion-datetime value="{{bookingDate | date:'yyyy-MM-dd'}}"></ion-datetime>
                     <ion-buttons slot="end">
                         <ion-button color="primary" size="small" (click)="changeDate(1)">
                             <ion-icon name="arrow-dropright-circle"></ion-icon>
                         </ion-button>
                     </ion-buttons>
-                </ion-toolbar>
-            </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            <ion-list>
-                <ion-item>
-                    <ion-label>Date</ion-label>
-                    <ion-datetime [value]="bookingDate"></ion-datetime>
                 </ion-item>
                 <ion-item>
                     <ion-label>Players</ion-label>
@@ -49,14 +40,21 @@
                                            [value]="value">{{value}}</ion-select-option>
                     </ion-select>
                 </ion-item>
+                <ion-item>
+                    <ion-label>Shift</ion-label>
+                    <div *ngFor="let shift of ['AM', 'PM', 'TWILIGHT']">
+                        <ion-button size="small" (click)="clickShift(shift)">{{shift}}</ion-button>
+                    </div>
+                </ion-item>
             </ion-list>
         </ion-card-content>
     </ion-card>
-    <ion-card *ngIf="teetimes.length">
+    <ion-card>
         <ion-card-header>
-            <ion-card-title *ngIf="!teetimes.length">No teetimes found.</ion-card-title>
+            <ion-card-title *ngIf="teetimes.length">Available teetimes</ion-card-title>
+            <ion-card-title *ngIf="!teetimes.length">No teetimes available.</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
+        <ion-card-content *ngIf="teetimes.length">
             <div *ngFor="let shift of ['morning', 'afternoon', 'evening']">
                 <div *ngIf="teetimesShift(shift).length">{{shift.toUpperCase()}}</div>
                 <ion-button *ngFor="let teetime of teetimesShift(shift)" size="small"
