@@ -14,10 +14,8 @@
         <ion-card-header>
             <ion-card-title>
                 <ion-toolbar>
-                    {{facility.name}}
-                    <ion-buttons slot="end">
-                        <ion-button color="primary" size="small" (click)="onClick()">Teetimes</ion-button>
-                    </ion-buttons>
+                    {{facility.name}}<br/>
+                    <ion-button class="teetimes" color="primary" size="small" (click)="onClick()">Teetimes</ion-button>
                 </ion-toolbar>
             </ion-card-title>
             <div *ngIf="facility.address.address1">

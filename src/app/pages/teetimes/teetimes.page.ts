@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Holes, ITeetime, Players } from '../../services/api/api.models';
-import { ApiService } from '../../services/api';
+import { ApiService, Holes, ITeetime, Players } from '../../services/api';
 
 @Component({
     selector: 'app-teetimes',
@@ -35,9 +34,9 @@ export class TeetimesPage implements OnInit, OnDestroy {
                 this.players = params.get('players') as Players || '2';
                 this.holes = (params.get('holes') as any || '18') as Holes;
 
-                this.api.teetimes(this.facilityId, this.bookingDate, this.players, this.holes).subscribe(teetimes => {
-                    this.teetimes = teetimes.sort();
-                });
+                this.api.teetimes(this.facilityId, this.bookingDate, this.players, this.holes).subscribe(teetimes =>
+                    this.teetimes = teetimes.sort((a, b) => a.time === b.time ? 0 : a.time < b.time ? -1 : 1)
+                );
             }
         );
     }
@@ -53,16 +52,43 @@ export class TeetimesPage implements OnInit, OnDestroy {
         return 'Teetimes';
     }
 
+    teetimesShift(shift: string): ITeetime[] {
+        const range = {
+            morning: { from: 0, to: 12 },
+            afternoon: { from: 12, to: 18 },
+            evening: { from: 18, to: 24 }
+        }[shift];
+        return this.teetimes.filter(tt => this._isBetween(tt, range.from, range.to));
+    }
+
     clickTeetime(teetime: ITeetime) {
 
     }
 
-    setDate(offset) {
-        console.log(offset);
-        const bookingDate = new Date(this.bookingDate);
-        bookingDate.setDate(bookingDate.getDate() + offset);
+    changeDate(offset) {
+        this.bookingDate.setDate((new Date(this.bookingDate)).getDate() + offset);
+        this._resetParams();
+    }
 
-        const queryParams = { bookingDate, players: this.players, holes: this.holes };
+    changePlayers($event: CustomEvent) {
+        this.players = $event.detail.value;
+        this._resetParams();
+    }
+
+    changeHoles($event: CustomEvent) {
+        this.holes = $event.detail.value;
+        this._resetParams();
+    }
+
+    // Private
+
+    private _resetParams() {
+        const queryParams = { bookingDate: this.bookingDate, players: this.players, holes: this.holes };
         this.router.navigate([ '/teetimes', this.facilityId ], { queryParams });
+    }
+
+    private _isBetween(teetime: ITeetime, from: number, to: number) {
+        const h0 = new Date(teetime.time).getHours();
+        return h0 >= from && h0 < to;
     }
 }

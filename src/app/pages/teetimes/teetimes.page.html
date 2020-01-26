@@ -13,15 +13,16 @@
     <ion-card>
         <ion-card-header>
             <ion-card-title>
+                Choose a teetime.
                 <ion-toolbar>
                     <ion-buttons slot="start">
-                        <ion-button color="primary" size="small" (click)="setDate(-1)">
+                        <ion-button color="primary" size="small" (click)="changeDate(-1)">
                             <ion-icon name="arrow-dropleft-circle"></ion-icon>
                         </ion-button>
                     </ion-buttons>
                     <div class="centered">{{bookingDate | date }}</div>
                     <ion-buttons slot="end">
-                        <ion-button color="primary" size="small" (click)="setDate(1)">
+                        <ion-button color="primary" size="small" (click)="changeDate(1)">
                             <ion-icon name="arrow-dropright-circle"></ion-icon>
                         </ion-button>
                     </ion-buttons>
@@ -29,17 +30,38 @@
             </ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <span *ngIf="teetimes.length">Found {{teetimes.length}} teetimes.</span>
-            <span *ngIf="!teetimes.length">No teetimes found.</span>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Date</ion-label>
+                    <ion-datetime [value]="bookingDate"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Players</ion-label>
+                    <ion-select (ionChange)="changePlayers($event)" interface="popover">
+                        <ion-select-option *ngFor="let value of [1,2,3,4]" [selected]="value === +players"
+                                           [value]="value">{{value}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Holes</ion-label>
+                    <ion-select (ionChange)="changeHoles($event)" interface="popover">
+                        <ion-select-option *ngFor="let value of [9, 18]" [selected]="value === +holes"
+                                           [value]="value">{{value}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
         </ion-card-content>
     </ion-card>
     <ion-card *ngIf="teetimes.length">
         <ion-card-header>
-            <ion-card-title>Choose a teetime</ion-card-title>
+            <ion-card-title *ngIf="!teetimes.length">No teetimes found.</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-            <ion-button *ngFor="let teetime of teetimes" size="small"
-                        (click)="clickTeetime(teetime)">{{teetime.time.substr(-8, 5)}}</ion-button>
+            <div *ngFor="let shift of ['morning', 'afternoon', 'evening']">
+                <div *ngIf="teetimesShift(shift).length">{{shift.toUpperCase()}}</div>
+                <ion-button *ngFor="let teetime of teetimesShift(shift)" size="small"
+                            (click)="clickTeetime(teetime)">{{teetime.time | date:'H:m'}}</ion-button>
+            </div>
         </ion-card-content>
     </ion-card>
 </ion-content>
