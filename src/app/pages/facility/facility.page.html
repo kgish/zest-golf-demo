@@ -6,6 +6,9 @@
         <ion-title>
             {{ title }}
         </ion-title>
+        <ion-buttons slot="end">
+            <ion-button routerLink="/home"><ion-icon name="home"></ion-icon></ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -26,7 +29,7 @@
                     {{ facility.address.zipcode }} {{ facility.address.place }}
                 </div>
                 <div>
-                    {{ facility.address.state }} {{ facility.address.country }}
+                    {{ facility.address.state }}, {{ facility.address.country }}
                 </div>
             </div>
         </ion-card-header>
@@ -65,26 +68,26 @@
             <ion-card-title>Services</ion-card-title>
         </ion-card-header>
         <ion-card-content *ngIf="facility && facility.services">
-            <ion-badge color="primary">Mid: {{facility.services.mid}}</ion-badge>
-            <ion-badge *ngIf="facility.services.drivingRange" color="primary">Driving range</ion-badge>
-            <ion-badge *ngIf="facility.services.chippingArea" color="primary">Chipping area</ion-badge>
-            <ion-badge *ngIf="facility.services.puttingGreen" color="primary">Putting green</ion-badge>
-            <ion-badge *ngIf="facility.services.proShop" color="primary">Pro shop</ion-badge>
-            <ion-badge *ngIf="facility.services.golfSchool" color="primary">Golf school</ion-badge>
-            <ion-badge *ngIf="facility.services.golfBuggy" color="primary">Golf buggy</ion-badge>
-            <ion-badge *ngIf="facility.services.pushTrolley" color="primary">Push trolley</ion-badge>
-            <ion-badge *ngIf="facility.services.electricTrolley" color="primary">Electric trolley</ion-badge>
-            <ion-badge *ngIf="facility.services.golfClubRentals" color="primary">Golf club rentals</ion-badge>
-            <ion-badge *ngIf="facility.services.caddies" color="primary">Caddies</ion-badge>
-            <ion-badge *ngIf="facility.services.restaurant" color="primary">Restaurant</ion-badge>
-            <ion-badge *ngIf="facility.services.bar" color="primary">Bar</ion-badge>
-            <ion-badge *ngIf="facility.services.lockerRoom" color="primary">Locker room</ion-badge>
-            <ion-badge *ngIf="facility.services.wifi" color="primary">Wifi</ion-badge>
-            <ion-badge *ngIf="facility.services.shuttleService" color="primary">Shuttle service</ion-badge>
+            <ion-badge color="medium">Mid: {{facility.services.mid}}</ion-badge>
+            <ion-badge *ngIf="facility.services.drivingRange" color="medium">Driving range</ion-badge>
+            <ion-badge *ngIf="facility.services.chippingArea" color="medium">Chipping area</ion-badge>
+            <ion-badge *ngIf="facility.services.puttingGreen" color="medium">Putting green</ion-badge>
+            <ion-badge *ngIf="facility.services.proShop" color="medium">Pro shop</ion-badge>
+            <ion-badge *ngIf="facility.services.golfSchool" color="medium">Golf school</ion-badge>
+            <ion-badge *ngIf="facility.services.golfBuggy" color="medium">Golf buggy</ion-badge>
+            <ion-badge *ngIf="facility.services.pushTrolley" color="medium">Push trolley</ion-badge>
+            <ion-badge *ngIf="facility.services.electricTrolley" color="medium">Electric trolley</ion-badge>
+            <ion-badge *ngIf="facility.services.golfClubRentals" color="medium">Golf club rentals</ion-badge>
+            <ion-badge *ngIf="facility.services.caddies" color="medium">Caddies</ion-badge>
+            <ion-badge *ngIf="facility.services.restaurant" color="medium">Restaurant</ion-badge>
+            <ion-badge *ngIf="facility.services.bar" color="medium">Bar</ion-badge>
+            <ion-badge *ngIf="facility.services.lockerRoom" color="medium">Locker room</ion-badge>
+            <ion-badge *ngIf="facility.services.wifi" color="medium">Wifi</ion-badge>
+            <ion-badge *ngIf="facility.services.shuttleService" color="medium">Shuttle service</ion-badge>
         </ion-card-content>
     </ion-card>
 
-    <ion-card *ngIf="facility.logo">
+    <ion-card class="logo" *ngIf="facility.logo">
         <ion-card-header>
             <ion-card-title>Logo</ion-card-title>
         </ion-card-header>
@@ -93,12 +96,21 @@
         </ion-card-content>
     </ion-card>
 
-    <ion-card *ngIf="facility.images && facility.images.length">
+    <ion-card class="images" *ngIf="facility.images && facility.images.length">
         <ion-card-header>
             <ion-card-title>Images</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <img *ngFor="let image of facility.images" [src]="image" alt="image"/>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card class="hotels">
+        <ion-card-header>
+            <ion-card-title>Hotels nearby</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            List of hotels goes here.
         </ion-card-content>
     </ion-card>
 </ion-content>

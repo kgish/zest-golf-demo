@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import { IFacility } from '../../services/api/api.models';
 import { ApiService } from '../../services/api';
@@ -16,7 +17,8 @@ export class FacilityPage implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private api: ApiService,
-        private router: Router
+        private router: Router,
+        private http: HttpClient
     ) {
     }
 
@@ -37,5 +39,20 @@ export class FacilityPage implements OnInit {
 
     private _init(facility: IFacility) {
         this.facility = facility;
+        if (!this.facility.logo) {
+            this.facility.logo = '/assets/images/golf-course-1-logo.jpg';
+        } else {
+            this.http.get(this.facility.logo).subscribe(
+                () => {},
+                () => this.facility.logo = '/assets/images/golf-course-1-logo.jpg'
+            );
+        }
+        if (!this.facility.images || !this.facility.images.length) {
+            this.facility.images = [
+                '/assets/images/golf-course-1.1.jpg',
+                '/assets/images/golf-course-1.2.jpg',
+                '/assets/images/golf-course-1.3.jpg'
+            ];
+        }
     }
 }

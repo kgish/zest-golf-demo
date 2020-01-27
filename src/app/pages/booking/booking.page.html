@@ -6,6 +6,9 @@
         <ion-title>
             {{ title }}
         </ion-title>
+        <ion-buttons slot="end">
+            <ion-button routerLink="/home"><ion-icon name="home"></ion-icon></ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -24,7 +27,7 @@
                 </ion-item>
                 <ion-item>
                     <ion-label>Date</ion-label>
-                    {{teetime | date:'yyyy-MM-dd'}}
+                    {{teetime | date:'MMM d, yyyy'}}
                 </ion-item>
                 <ion-item>
                     <ion-label>Teetime</ion-label>
@@ -50,6 +53,15 @@
                     <ion-button color="secondary" (click)="onCancel()">Cancel</ion-button>
                 </ion-item>
             </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Hotels nearby</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            List of hotels goes here.
         </ion-card-content>
     </ion-card>
 </ion-content>

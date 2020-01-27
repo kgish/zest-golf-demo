@@ -64,7 +64,7 @@ export class TeetimesPage implements OnInit, OnDestroy {
     }
 
     bookTeetime(teetime: ITeetime) {
-        const queryParams = { teetime: this.bookingDate, players: this.players, holes: this.holes, teeId: teetime.id };
+        const queryParams = { teetime: teetime.time, players: this.players, holes: this.holes, teeId: teetime.id };
         this.router.navigate([ '/booking', this.facilityId ], { queryParams });
     }
 

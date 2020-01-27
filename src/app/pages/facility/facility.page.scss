@@ -6,3 +6,11 @@ ion-badge {
   margin-right: 5px;
 }
 
+ion-card.images {
+  img {
+    margin-top: 10px;
+  }
+  img:first-child {
+    margin-top: 0;
+  }
+}
