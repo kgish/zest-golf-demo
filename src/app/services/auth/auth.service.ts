@@ -41,7 +41,15 @@ export class AuthService {
     login(value: { username: string, password: string, remember: boolean }) {
         const { username, password, remember } = value;
         const token = btoa(username + ':' + password);
-        this.currentUser = { username, role: Role.USER, token };
+        this.currentUser = {
+            username,
+            firstName: 'Kiffin',
+            lastName: 'Gish',
+            email: 'kiffin.gish@planet.nl',
+            phone: '+31657552871',
+            role: Role.USER,
+            token
+        };
         this.api.countries().subscribe(
             () => {
                 if (remember) {

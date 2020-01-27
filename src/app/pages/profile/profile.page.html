@@ -10,23 +10,27 @@
             <p>This is your profile.</p>
             <ion-list>
                 <ion-item>
-                    <ion-label>Username :</ion-label>
+                    <ion-label>Username : </ion-label>
                     <ion-input readonly [value]="currentUser.username || 'None'" type="text"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Email :</ion-label>
-                    <ion-input readonly [value]="currentUser.email || 'None'" type="text"></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label>First name :</ion-label>
+                    <ion-label>First name : </ion-label>
                     <ion-input readonly [value]="currentUser.firstName || 'None'" type="text"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Last name :</ion-label>
+                    <ion-label>Last name : </ion-label>
                     <ion-input readonly [value]="currentUser.lastName || 'None'" type="text"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Role :</ion-label>
+                    <ion-label>Email : </ion-label>
+                    <ion-input readonly [value]="currentUser.email || 'None'" type="text"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Phone : </ion-label>
+                    <ion-input readonly [value]="currentUser.phone || 'None'" type="text"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Role : </ion-label>
                     <ion-input readonly [value]="currentUser.role || 'None'" type="text"></ion-input>
                 </ion-item>
             </ion-list>

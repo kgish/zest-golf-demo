@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
-import { ApiService, Holes, IFacility, Players } from '../../services/api';
+import {
+    ApiService,
+    AuthService,
+    Holes,
+    IFacility,
+    Players
+} from '../../services';
 
 @Component({
     selector: 'app-booking',
@@ -14,12 +21,13 @@ export class BookingPage implements OnInit {
     teetime: Date;
     holes: Holes;
     players: Players;
-    teeId: string;
+    teeId: number;
     round: number;
 
     constructor(
         private route: ActivatedRoute,
         private api: ApiService,
+        private auth: AuthService,
         private router: Router
     ) {
     }
@@ -30,7 +38,7 @@ export class BookingPage implements OnInit {
         this.teetime = new Date(this.route.snapshot.queryParamMap.get('teetime'));
         this.holes = (this.route.snapshot.queryParamMap.get('holes') as unknown) as Holes;
         this.players = (this.route.snapshot.queryParamMap.get('players') as unknown) as Players;
-        this.teeId = this.route.snapshot.queryParamMap.get('teeId');
+        this.teeId = +this.route.snapshot.queryParamMap.get('teeId');
         this.round = 1;
 
         this.api.facility(facilityId).subscribe(facility => {
@@ -50,15 +58,19 @@ export class BookingPage implements OnInit {
     }
 
     onSubmit() {
-        // '{"facilityId":"1",
-        // "teetime":"2018-08-20 07:20:00",
-        //     "round":"1",
-        //     "players":3,
-        //     "contactPhone":"07712345678",
-        //     "contactEmail":"james.smith@gmail.com",
-        //     "contactName":"James Smith",
-        //     "holes":9,
-        //     "teeId":4250490}'
+
+
+
+        const currentUser = this.auth.getCurrentUser();
+        this.api.bookTeetime(this.facility.id.toString(), new Date(this.teetime), this.round.toString(), this.players, currentUser.phone,
+            currentUser.email, currentUser.firstName + ' ' + currentUser.lastName, this.holes, this.teeId).subscribe(
+            teeId => {
+            },
+            error => {
+            },
+            () => {
+            }
+        );
     }
 
     onCancel() {

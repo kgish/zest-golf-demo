@@ -55,4 +55,48 @@ export class ApiService {
             map((x: IResults<ITeetime>) => x.data.sort((a, b) => a.time === b.time ? 0 : (a.time > b.time ? 0 : -1)))
         );
     }
+
+    // {
+    //     "facilityId":"1",
+    //     "teetime":"2018-08-20 07:20:00",
+    //     "round":"1",
+    //     "players":3,
+    //     "contactPhone":"07712345678",
+    //     "contactEmail":"james.smith@gmail.com",
+    //     "contactName":"James Smith",
+    //     "holes":9,
+    //     "teeId":4250490
+    // }
+
+    bookTeetime(facilityId: string, teetime: Date, round: string, players: Players, contactPhone: string,
+                contactEmail: string, contactName: string, holes: Holes, teeId: number): Observable<string> {
+        const url = environment.apiUrl + '/bookings';
+        const body = {
+            facilityId,
+            teetime: this._formatTeetime(teetime),
+            round,
+            players: +players,
+            contactPhone,
+            contactEmail,
+            contactName,
+            holes: +holes,
+            teeId
+        };
+        return this.http.post(url, body).pipe(
+            map((x: IResult<string>) => x.data)
+        );
+    }
+
+    // Private
+
+    private _formatTeetime(teetime: Date): string {
+        // "teetime":"YYYY-MM-DD HH:MM:00",
+        const year = teetime.getFullYear();
+        const month = (teetime.getMonth() + 1).toString().padStart(2, '0');
+        const date = teetime.getDate().toString().padStart(2, '0');
+        const hours = teetime.getHours().toString().padStart(2, '0');
+        const minutes = teetime.getMinutes().toString().padStart(2, '0');
+
+        return `${year}-${month}-${date} ${hours}:${minutes}:00`;
+    }
 }
