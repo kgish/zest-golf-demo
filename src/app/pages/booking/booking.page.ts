@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import {
     ApiService,
     AuthService,
     Holes,
     IFacility,
-    Players
+    Players,
+    UiService
 } from '../../services';
 
 @Component({
@@ -27,6 +27,7 @@ export class BookingPage implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private api: ApiService,
+        private ui: UiService,
         private auth: AuthService,
         private router: Router
     ) {
@@ -58,17 +59,15 @@ export class BookingPage implements OnInit {
     }
 
     onSubmit() {
-
-
-
         const currentUser = this.auth.getCurrentUser();
         this.api.bookTeetime(this.facility.id.toString(), new Date(this.teetime), this.round.toString(), this.players, currentUser.phone,
             currentUser.email, currentUser.firstName + ' ' + currentUser.lastName, this.holes, this.teeId).subscribe(
             teeId => {
+                this.ui.showToast(`Booking successful #${teeId}`);
             },
             error => {
-            },
-            () => {
+                console.error(error);
+                this.ui.showToast(`Booking failed (${error.status} ${error.statusText})`);
             }
         );
     }

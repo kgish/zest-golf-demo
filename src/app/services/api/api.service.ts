@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { delay, finalize, map, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { Holes, IFacility, ITeetime, Players } from './api.models';
+import { UiService } from '../ui';
 
 interface IResult<T> {
     success: boolean;
@@ -16,32 +17,43 @@ interface IResults<T> {
     data: T[];
 }
 
+const TIMEOUT_MSECS = 500;
+
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private ui: UiService) {
     }
 
     countries(connected: boolean = false): Observable<string[]> {
         const url = environment.apiUrl + '/countries' + (connected ? '?connected=true' : '');
+        this.ui.showLoading();
         return this.http.get(url).pipe(
-            map((x: IResults<string>) => x.data.sort())
+            delay(TIMEOUT_MSECS),
+            map((x: IResults<string>) => x.data.sort()),
+            finalize(() => this.ui.hideLoading())
         );
     }
 
     facilities(country: string, connected: boolean = false): Observable<IFacility[]> {
         const url = environment.apiUrl + '/facilities?country=' + encodeURIComponent(country) + (connected ? '&connected=true' : '');
+        this.ui.showLoading();
         return this.http.get(url).pipe(
-            map((x: IResults<IFacility>) => x.data.sort((a, b) => a.name === b.name ? 0 : (a.name > b.name ? 0 : -1)))
+            delay(TIMEOUT_MSECS),
+            map((x: IResults<IFacility>) => x.data.sort((a, b) => a.name === b.name ? 0 : (a.name > b.name ? 0 : -1))),
+            finalize(() => this.ui.hideLoading())
         );
     }
 
     facility(id: string, details: boolean = false): Observable<IFacility> {
         const url = environment.apiUrl + '/facilities/' + (details ? 'details/' : '') + id;
+        this.ui.showLoading();
         return this.http.get(url).pipe(
-            map((x: IResult<IFacility>) => x.data)
+            delay(TIMEOUT_MSECS),
+            map((x: IResult<IFacility>) => x.data),
+            finalize(() => this.ui.hideLoading())
         );
     }
 
@@ -51,22 +63,13 @@ export class ApiService {
             (bookingDate.getMonth() + 1).toString().padStart(2, '0') + '-' +
             bookingDate.getFullYear();
         const url = environment.apiUrl + '/teetimes/' + facilityId + `/?bookingDate=${dd}&players=${players}&holes=${holes}`;
+        this.ui.showLoading();
         return this.http.get(url).pipe(
-            map((x: IResults<ITeetime>) => x.data.sort((a, b) => a.time === b.time ? 0 : (a.time > b.time ? 0 : -1)))
+            delay(TIMEOUT_MSECS),
+            map((x: IResults<ITeetime>) => x.data.sort((a, b) => a.time === b.time ? 0 : (a.time > b.time ? 0 : -1))),
+            finalize(() => this.ui.hideLoading())
         );
     }
-
-    // {
-    //     "facilityId":"1",
-    //     "teetime":"2018-08-20 07:20:00",
-    //     "round":"1",
-    //     "players":3,
-    //     "contactPhone":"07712345678",
-    //     "contactEmail":"james.smith@gmail.com",
-    //     "contactName":"James Smith",
-    //     "holes":9,
-    //     "teeId":4250490
-    // }
 
     bookTeetime(facilityId: string, teetime: Date, round: string, players: Players, contactPhone: string,
                 contactEmail: string, contactName: string, holes: Holes, teeId: number): Observable<string> {
@@ -82,15 +85,18 @@ export class ApiService {
             holes: +holes,
             teeId
         };
+        this.ui.showLoading();
         return this.http.post(url, body).pipe(
-            map((x: IResult<string>) => x.data)
+            delay(TIMEOUT_MSECS),
+            map((x: IResult<string>) => x.data),
+            finalize(() => this.ui.hideLoading())
         );
     }
 
     // Private
 
     private _formatTeetime(teetime: Date): string {
-        // "teetime":"YYYY-MM-DD HH:MM:00",
+        // teetime => "YYYY-MM-DD HH:MM:00"
         const year = teetime.getFullYear();
         const month = (teetime.getMonth() + 1).toString().padStart(2, '0');
         const date = teetime.getDate().toString().padStart(2, '0');

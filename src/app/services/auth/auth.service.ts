@@ -69,11 +69,15 @@ export class AuthService {
 
     logout(b: boolean = true) {
         if (b) {
-            this.currentUser = null;
-            localStorage.removeItem(KEY_CURRENT_USER);
-            this.currentUserChanged.next(this.currentUser);
-            this.router.navigate([ 'login' ]);
-            this.ui.showToast('Logged out successfully');
+            this.ui.showLoading();
+            setTimeout(() => {
+                this.ui.hideLoading();
+                this.currentUser = null;
+                localStorage.removeItem(KEY_CURRENT_USER);
+                this.currentUserChanged.next(this.currentUser);
+                this.router.navigate([ 'login' ]);
+                this.ui.showToast('Logged out successfully');
+            }, 1000);
         } else {
             this.ui.showToast('Cancelled logout');
             this.location.back();

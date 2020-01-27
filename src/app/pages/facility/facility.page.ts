@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { IFacility } from '../../services/api/api.models';
-import { ApiService } from '../../services/api';
+import {
+    ApiService,
+    IFacility
+} from '../../services';
 
 @Component({
     selector: 'app-facility',
@@ -24,7 +26,11 @@ export class FacilityPage implements OnInit {
 
     ngOnInit() {
         const facilityId = this.route.snapshot.paramMap.get('id');
-        this.api.facility(facilityId, true).subscribe(facility => this._init(facility));
+        this.api.facility(facilityId, true).subscribe(
+            facility => this._init(facility),
+            error => console.error(error),
+            () => {
+            });
     }
 
     onClick() {
@@ -43,7 +49,8 @@ export class FacilityPage implements OnInit {
             this.facility.logo = '/assets/images/golf-course-1-logo.jpg';
         } else {
             this.http.get(this.facility.logo).subscribe(
-                () => {},
+                () => {
+                },
                 () => this.facility.logo = '/assets/images/golf-course-1-logo.jpg'
             );
         }
