@@ -46,6 +46,10 @@ const routes: Routes = [
     {
         path: 'teetimes/:id',
         loadChildren: () => import('./pages/teetimes/teetimes.module').then(m => m.TeetimesPageModule)
+    },
+    {
+        path: 'booking/:id',
+        loadChildren: () => import('./pages/booking/booking.module').then(m => m.BookingPageModule)
     }
 ];
 

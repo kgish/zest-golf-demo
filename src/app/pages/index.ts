@@ -1,4 +1,5 @@
 export * from './about';
+export * from './booking';
 export * from './country';
 export * from './facility';
 export * from './help';

@@ -19,6 +19,8 @@ export class TeetimesPage implements OnInit, OnDestroy {
     players: Players;
     holes: Holes;
 
+    private offset = 0;
+
     constructor(
         private route: ActivatedRoute,
         private api: ApiService,
@@ -61,13 +63,17 @@ export class TeetimesPage implements OnInit, OnDestroy {
         return this.teetimes.filter(tt => this._isBetween(tt, range.from, range.to));
     }
 
-    clickTeetime(teetime: ITeetime) {
-
+    bookTeetime(teetime: ITeetime) {
+        const queryParams = { teetime: this.bookingDate, players: this.players, holes: this.holes, teeId: teetime.id };
+        this.router.navigate([ '/booking', this.facilityId ], { queryParams });
     }
 
     changeDate(offset) {
-        this.bookingDate.setDate((new Date(this.bookingDate)).getDate() + offset);
-        this._resetParams();
+        if (!(this.offset === 0 && offset === -1)) {
+            this.offset += offset;
+            this.bookingDate.setDate((new Date(this.bookingDate)).getDate() + offset);
+            this._resetParams();
+        }
     }
 
     changePlayers($event: CustomEvent) {
@@ -78,10 +84,6 @@ export class TeetimesPage implements OnInit, OnDestroy {
     changeHoles($event: CustomEvent) {
         this.holes = $event.detail.value;
         this._resetParams();
-    }
-
-    clickShift(shift: string) {
-
     }
 
     // Private

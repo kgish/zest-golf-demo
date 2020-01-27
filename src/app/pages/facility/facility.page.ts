@@ -21,8 +21,8 @@ export class FacilityPage implements OnInit {
     }
 
     ngOnInit() {
-        const id = this.route.snapshot.paramMap.get('id');
-        this.api.facility(id, true).subscribe(facility => this._init(facility));
+        const facilityId = this.route.snapshot.paramMap.get('id');
+        this.api.facility(facilityId, true).subscribe(facility => this._init(facility));
     }
 
     onClick() {
