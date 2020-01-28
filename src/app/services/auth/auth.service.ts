@@ -33,7 +33,10 @@ export class AuthService {
                     this.currentUserChanged.next(this.currentUser);
                     this.router.navigate([ 'home' ]);
                 },
-                error => this.currentUser = null
+                error => {
+                    this.currentUser = null;
+                    console.error(error);
+                }
             );
         }
     }
@@ -46,7 +49,7 @@ export class AuthService {
             firstName: 'Kiffin',
             lastName: 'Gish',
             email: 'kiffin.gish@planet.nl',
-            phone: '+31657552871',
+            phone: '123456789',
             role: Role.USER,
             token
         };

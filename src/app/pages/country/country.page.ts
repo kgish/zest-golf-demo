@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { IFacility } from '../../services/api/api.models';
-import { ApiService } from '../../services/api';
+import { ApiService, IFacility } from '../../services';
 
 @Component({
     selector: 'app-country',
@@ -31,7 +30,8 @@ export class CountryPage implements OnInit {
     }
 
     onClick(facility: IFacility) {
-        this.router.navigate([ '/facility', facility.id ]);
+        this.router.navigate([ '/facility', facility.id ]).then(() => {
+        });
     }
 
     get title() {

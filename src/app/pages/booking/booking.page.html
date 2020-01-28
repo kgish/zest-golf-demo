@@ -42,13 +42,6 @@
                     {{holes}}
                 </ion-item>
                 <ion-item>
-                    <ion-label>Round</ion-label>
-                    <ion-select (ionChange)="changeRound($event)" interface="popover">
-                        <ion-select-option *ngFor="let value of [1,2,3,4]" [selected]="value === round"
-                                           [value]="value">{{value}}</ion-select-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item>
                     <ion-button color="primary" (click)="onSubmit()">Book</ion-button>
                     <ion-button color="secondary" (click)="onCancel()">Cancel</ion-button>
                 </ion-item>

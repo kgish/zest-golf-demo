@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { delay, finalize, map, tap } from 'rxjs/operators';
+import { delay, finalize, map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { Holes, IFacility, ITeetime, Players } from './api.models';
@@ -71,17 +71,18 @@ export class ApiService {
         );
     }
 
-    bookTeetime(facilityId: string, teetime: Date, round: string, players: Players, contactPhone: string,
-                contactEmail: string, contactName: string, holes: Holes, teeId: number): Observable<string> {
+    bookTeetime(facilityId: number, teetime: Date, players: Players, contactPhone: string,
+                contactEmail: string, contactFirstName: string, contactLastName: string, holes: Holes, teeId: number): Observable<string> {
         const url = environment.apiUrl + '/bookings';
         const body = {
             facilityId,
             teetime: this._formatTeetime(teetime),
-            round,
+            round: `${holes} holes`,
             players: +players,
             contactPhone,
             contactEmail,
-            contactName,
+            contactFirstName,
+            contactLastName,
             holes: +holes,
             teeId
         };
