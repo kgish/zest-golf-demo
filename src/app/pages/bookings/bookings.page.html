@@ -1,29 +1,35 @@
 <script src="bookings.page.spec.ts"></script>
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-      {{ title }}
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button routerLink="/home"><ion-icon name="home"></ion-icon></ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{ title }}
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button routerLink="/home">
+                <ion-icon name="home"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        List of booked teetimes
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content *ngIf="bookings">
-      {{ bookings | json }}
-    </ion-card-content>
-  </ion-card>
+    <ion-card>
+        <ion-card-content *ngIf="bookings">
+            <ion-list>
+                <ion-list-header *ngIf="bookings.length">List of booked teetimes</ion-list-header>
+                <ion-list-header *ngIf="!bookings.length">None found</ion-list-header>
+                <ion-item *ngFor="let booking of bookings">
+                    <ion-datetime value="{{booking.teetime | date:'yyyy-MM-dd'}}"></ion-datetime>
+                    <ion-buttons slot="end">
+                        <ion-button color="primary" size="small">{{booking.teetime | date:'H:m'}}</ion-button>
+                    </ion-buttons>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
 
 <app-footer></app-footer>
