@@ -42,13 +42,6 @@ export class BookingPage implements OnInit {
 
         this.api.facility(facilityId).subscribe(facility => {
             this.facility = facility;
-            console.log({
-                facilityId: this.facility.id,
-                teetime: this.teetime,
-                holes: this.holes,
-                players: this.players,
-                teeId: this.teeId
-            });
         });
     }
 
@@ -56,8 +49,10 @@ export class BookingPage implements OnInit {
         const currentUser = this.auth.getCurrentUser();
         this.api.bookTeetime(this.facility.id, new Date(this.teetime), this.players, currentUser.phone,
             currentUser.email, currentUser.firstName, currentUser.lastName, this.holes, this.teeId).subscribe(
-            bookingId => {
-                this.ui.showToast(`Booking successful #${bookingId}`);
+            (data: any) => {
+                this.ui.showToast(`Booking successful #${data.bookingId}`);
+                const queryParams = { bookingDate: new Date(this.teetime), players: this.players, holes: this.holes };
+                this.router.navigate([ '/teetimes', this.facility.id ], { queryParams }).then(() => {});
             },
             error => {
                 console.error(error);

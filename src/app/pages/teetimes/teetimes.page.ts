@@ -65,7 +65,7 @@ export class TeetimesPage implements OnInit, OnDestroy {
 
     bookTeetime(teetime: ITeetime) {
         const queryParams = { teetime: teetime.time, players: this.players, holes: this.holes, teeId: teetime.id };
-        this.router.navigate([ '/booking', this.facilityId ], { queryParams });
+        this.router.navigate([ '/booking', this.facilityId ], { queryParams }).then(() => {});
     }
 
     changeDate(offset) {
@@ -90,7 +90,7 @@ export class TeetimesPage implements OnInit, OnDestroy {
 
     private _resetParams() {
         const queryParams = { bookingDate: this.bookingDate, players: this.players, holes: this.holes };
-        this.router.navigate([ '/teetimes', this.facilityId ], { queryParams });
+        this.router.navigate([ '/teetimes', this.facilityId ], { queryParams }).then(() => {});
     }
 
     private _isBetween(teetime: ITeetime, from: number, to: number) {

@@ -31,7 +31,7 @@ export class AuthService {
             this.api.countries().subscribe(
                 () => {
                     this.currentUserChanged.next(this.currentUser);
-                    this.router.navigate([ 'home' ]);
+                    this.router.navigate([ 'home' ]).then(() => {});
                 },
                 error => {
                     this.currentUser = null;
@@ -59,7 +59,7 @@ export class AuthService {
                     localStorage.setItem(KEY_CURRENT_USER, JSON.stringify(this.currentUser));
                 }
                 this.currentUserChanged.next(this.currentUser);
-                this.router.navigate([ 'home' ]);
+                this.router.navigate([ 'home' ]).then(() => {});
                 this.ui.showToast('Logged in successfully');
             },
             error => {
@@ -78,7 +78,7 @@ export class AuthService {
                 this.currentUser = null;
                 localStorage.removeItem(KEY_CURRENT_USER);
                 this.currentUserChanged.next(this.currentUser);
-                this.router.navigate([ 'login' ]);
+                this.router.navigate([ 'login' ]).then(() => {});
                 this.ui.showToast('Logged out successfully');
             }, 1000);
         } else {
