@@ -34,6 +34,12 @@ export class AppComponent implements OnInit, OnDestroy {
             when: [ 'logged-in' ]
         },
         {
+            title: 'Bookings',
+            url: '/bookings',
+            icon: 'calendar',
+            when: [ 'logged-in' ]
+        },
+        {
             title: 'Profile',
             url: '/profile',
             icon: 'person',

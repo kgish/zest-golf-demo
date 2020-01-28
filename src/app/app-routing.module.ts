@@ -50,6 +50,10 @@ const routes: Routes = [
     {
         path: 'booking/:id',
         loadChildren: () => import('./pages/booking/booking.module').then(m => m.BookingPageModule)
+    },
+    {
+        path: 'bookings',
+        loadChildren: () => import('./pages/bookings/bookings.module').then(m => m.BookingsPageModule)
     }
 ];
 

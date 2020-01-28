@@ -67,3 +67,17 @@ export interface ITeetime {
     players: number;
     pricing: IPricing[];
 }
+
+export interface IBooking {
+    teetime: string;
+    round: string;
+    players: number;
+    teeId: number;
+    contactFirstName: string;
+    contactLastName: string;
+    contactPhone: string;
+    contactEmail: string;
+    createdAt: string;
+    bookingId: string;
+    status: string;
+}

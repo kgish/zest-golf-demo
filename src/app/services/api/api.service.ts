@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { delay, finalize, map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
-import { Holes, IFacility, ITeetime, Players } from './api.models';
+import { Holes, IBooking, IFacility, ITeetime, Players } from './api.models';
 import { UiService } from '../ui';
 
 interface IResult<T> {
@@ -76,7 +76,7 @@ export class ApiService {
         const url = environment.apiUrl + '/bookings';
         const body = {
             facilityId,
-            teetime: this._formatTeetime(teetime),
+            teetime: this._formatTeetimeDate(teetime),
             round: `${holes} holes`,
             players: +players,
             contactPhone,
@@ -94,16 +94,41 @@ export class ApiService {
         );
     }
 
+    bookings(fromDate: Date = null, toDate: Date = null) {
+        let url = environment.apiUrl + '/bookings';
+        if (fromDate) {
+            url += `?fromDate=${this._formatBookingDate(fromDate)}`;
+            if (toDate) {
+                url += `&toDate=${this._formatBookingDate(toDate)})`;
+            }
+        }
+        this.ui.showLoading();
+        return this.http.get(url).pipe(
+            delay(TIMEOUT_MSECS),
+            map((x: IResults<IBooking>) => x.data.sort((a, b) => a.teetime === b.teetime ? 0 : (a.teetime > b.teetime ? 0 : -1))),
+            finalize(() => this.ui.hideLoading())
+        );
+    }
+
     // Private
 
-    private _formatTeetime(teetime: Date): string {
-        // teetime => "YYYY-MM-DD HH:MM:00"
-        const year = teetime.getFullYear();
-        const month = (teetime.getMonth() + 1).toString().padStart(2, '0');
-        const date = teetime.getDate().toString().padStart(2, '0');
-        const hours = teetime.getHours().toString().padStart(2, '0');
-        const minutes = teetime.getMinutes().toString().padStart(2, '0');
+    private _formatTeetimeDate(teetimeDate: Date): string {
+        // teetimeDate => "YYYY-MM-DD HH:MM:00"
+        const year = teetimeDate.getFullYear();
+        const month = (teetimeDate.getMonth() + 1).toString().padStart(2, '0');
+        const date = teetimeDate.getDate().toString().padStart(2, '0');
+        const hours = teetimeDate.getHours().toString().padStart(2, '0');
+        const minutes = teetimeDate.getMinutes().toString().padStart(2, '0');
 
         return `${year}-${month}-${date} ${hours}:${minutes}:00`;
+    }
+
+    private _formatBookingDate(bookingDate: Date): string {
+        // bookingDate => "DD-MM-YYYY"
+        const year = bookingDate.getFullYear();
+        const month = (bookingDate.getMonth() + 1).toString().padStart(2, '0');
+        const date = bookingDate.getDate().toString().padStart(2, '0');
+
+        return `${date}-${month}-${year}`;
     }
 }

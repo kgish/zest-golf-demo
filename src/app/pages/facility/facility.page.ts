@@ -34,8 +34,7 @@ export class FacilityPage implements OnInit {
     }
 
     onClick() {
-        this.router.navigate([ '/teetimes', this.facility.id ]).then(() => {
-        });
+        this.router.navigate([ 'teetimes', this.facility.id ]);
     }
 
     get title() {

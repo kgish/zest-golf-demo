@@ -18,7 +18,7 @@ export class AuthGuard {
         const currentUser = this.auth.getCurrentUser();
         // console.log(`${fn} canActivate() currentUser='${JSON.stringify(currentUser)}'`);
         if (!this.auth.getCurrentUser()) {
-            this.router.navigate([ 'login' ]).then(() => {});
+            this.router.navigate([ 'login' ]);
             result = false;
         }
         // console.log(`${fn} canActivate() currentUser='${JSON.stringify(currentUser)}' => '${result}'`);

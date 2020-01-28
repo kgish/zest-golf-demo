@@ -52,7 +52,7 @@ export class BookingPage implements OnInit {
             (data: any) => {
                 this.ui.showToast(`Booking successful #${data.bookingId}`);
                 const queryParams = { bookingDate: new Date(this.teetime), players: this.players, holes: this.holes };
-                this.router.navigate([ '/teetimes', this.facility.id ], { queryParams }).then(() => {});
+                this.router.navigate([ 'teetimes', this.facility.id ], { queryParams });
             },
             error => {
                 console.error(error);
@@ -63,7 +63,7 @@ export class BookingPage implements OnInit {
 
     onCancel() {
         const queryParams = { bookingDate: this.teetime, players: this.players, holes: this.holes };
-        this.router.navigate([ '/teetimes', this.facility.id ], { queryParams }).then(() => {});
+        this.router.navigate([ 'teetimes', this.facility.id ], { queryParams });
     }
 
     get title() {

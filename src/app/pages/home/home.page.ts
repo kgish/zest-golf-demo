@@ -28,6 +28,6 @@ export class HomePage implements OnInit {
     }
 
     onClick(country: string): void {
-        this.router.navigate([ '/country', country ]).then(() => {});
+        this.router.navigate([ 'country', country ]);
     }
 }

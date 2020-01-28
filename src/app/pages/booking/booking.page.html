@@ -1,16 +1,4 @@
-<ion-header>
-    <ion-toolbar color="primary">
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-        </ion-buttons>
-        <ion-title>
-            {{ title }}
-        </ion-title>
-        <ion-buttons slot="end">
-            <ion-button routerLink="/home"><ion-icon name="home"></ion-icon></ion-button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
+<app-header [title]="title"></app-header>
 
 <ion-content>
     <ion-card>

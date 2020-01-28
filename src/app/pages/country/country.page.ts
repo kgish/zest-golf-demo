@@ -30,8 +30,7 @@ export class CountryPage implements OnInit {
     }
 
     onClick(facility: IFacility) {
-        this.router.navigate([ '/facility', facility.id ]).then(() => {
-        });
+        this.router.navigate([ 'facility', facility.id ]);
     }
 
     get title() {
