@@ -18,6 +18,9 @@ export class BookingsPage implements OnInit {
         this.api.bookings().subscribe(bookings => this.bookings = bookings);
     }
 
+    bookingDetail(booking: IBooking) {
+        console.log(booking);
+    }
     get title() {
         return 'Bookings';
     }

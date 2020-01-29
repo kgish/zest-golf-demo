@@ -7,12 +7,14 @@
             {{ title }}
         </ion-title>
         <ion-buttons slot="end">
-            <ion-button routerLink="/home"><ion-icon name="home"></ion-icon></ion-button>
+            <ion-button routerLink="/home">
+                <ion-icon name="home"></ion-icon>
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="teetimes">
+<ion-content>
     <ion-card>
         <ion-card-content>
             <ion-list>
@@ -46,9 +48,12 @@
             </ion-list>
         </ion-card-content>
     </ion-card>
+
     <ion-card>
-        <ion-card-header *ngIf="!teetimes.length">
-            <ion-card-title>No teetimes found.</ion-card-title>
+        <ion-card-header>
+            <ion-card-subtitle *ngIf="teetimes.length">Found {{teetimes.length}} teetime{{teetimes.length > 1 ? 's' : ''}}.
+            </ion-card-subtitle>
+            <ion-card-subtitle *ngIf="!teetimes.length">No teetimes found.</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content *ngIf="teetimes.length">
             <div *ngFor="let shift of ['morning', 'afternoon', 'evening']">
@@ -56,6 +61,18 @@
                 <ion-button *ngFor="let teetime of teetimesShift(shift)" size="small"
                             (click)="bookTeetime(teetime)">{{teetime.time | date:'H:m'}}</ion-button>
             </div>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle *ngIf="bookings.length">Found {{bookings.length}} booking{{bookings.length > 1 ? 's' : ''}}.
+            </ion-card-subtitle>
+            <ion-card-subtitle *ngIf="!bookings.length">No bookings found.</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content *ngIf="bookings.length">
+            <ion-button *ngFor="let booking of bookings" size="small"
+                        (click)="bookingDetail(booking)">{{booking.teetime | date:'H:m'}}</ion-button>
         </ion-card-content>
     </ion-card>
 </ion-content>

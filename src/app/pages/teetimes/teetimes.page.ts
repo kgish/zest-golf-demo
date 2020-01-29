@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { ApiService, Holes, ITeetime, Players } from '../../services/api';
+import { ApiService, Holes, IBooking, ITeetime, Players } from '../../services/api';
 
 @Component({
     selector: 'app-teetimes',
@@ -12,6 +12,7 @@ import { ApiService, Holes, ITeetime, Players } from '../../services/api';
 export class TeetimesPage implements OnInit, OnDestroy {
 
     teetimes: ITeetime[] = [];
+    bookings: IBooking[] = [];
     subscription: Subscription;
 
     facilityId: number;
@@ -38,6 +39,9 @@ export class TeetimesPage implements OnInit, OnDestroy {
 
                 this.api.teetimes(this.facilityId, this.bookingDate, this.players, this.holes).subscribe(teetimes =>
                     this.teetimes = teetimes.sort((a, b) => a.time === b.time ? 0 : a.time < b.time ? -1 : 1)
+                );
+                this.api.bookings(this.bookingDate).subscribe(bookings =>
+                    this.bookings = bookings.sort((a, b) => a.teetime === b.teetime ? 0 : a.teetime < b.teetime ? -1 : 1)
                 );
             }
         );
@@ -84,6 +88,10 @@ export class TeetimesPage implements OnInit, OnDestroy {
     changeHoles($event: CustomEvent) {
         this.holes = $event.detail.value;
         this._resetParams();
+    }
+
+    bookingDetail(booking: IBooking) {
+        console.log(booking);
     }
 
     // Private

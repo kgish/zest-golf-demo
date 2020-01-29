@@ -100,6 +100,8 @@ export class ApiService {
             url += `?fromDate=${this._formatBookingDate(fromDate)}`;
             if (toDate) {
                 url += `&toDate=${this._formatBookingDate(toDate)})`;
+            } else {
+                url += `&toDate=${this._formatBookingDate(fromDate)})`;
             }
         }
         this.ui.showLoading();
