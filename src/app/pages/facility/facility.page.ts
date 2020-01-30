@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import {
-    ApiService,
-    IFacility
+    ApiService, HotelService,
+    IFacility,
+    IHotel
 } from '../../services';
 
 @Component({
@@ -15,10 +16,12 @@ import {
 export class FacilityPage implements OnInit {
 
     facility: IFacility;
+    hotels: IHotel[] = [];
 
     constructor(
         private route: ActivatedRoute,
         private api: ApiService,
+        private hotel: HotelService,
         private router: Router,
         private http: HttpClient
     ) {
@@ -28,9 +31,12 @@ export class FacilityPage implements OnInit {
         const facilityId = this.route.snapshot.paramMap.get('id');
         this.api.facility(facilityId, true).subscribe(
             facility => this._init(facility),
-            error => console.error(error),
-            () => {
-            });
+            error => console.error(error)
+        );
+        this.hotel.getNearby(facilityId).subscribe(
+            hotels => this.hotels = hotels,
+            error => console.error(error)
+        );
     }
 
     onClick() {
