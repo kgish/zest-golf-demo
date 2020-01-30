@@ -11,25 +11,22 @@ const MAX = 4;
 })
 export class HotelService {
 
-    private num: number;
-
     constructor() {
-        this.num = HOTELS.length;
     }
 
-    getNearby(facilityId: string): Observable<IHotel[]> {
+    getNearby(facilityId: number): Observable<IHotel[]> {
         const hotels: IHotel[] = [];
         const total = Math.floor(Math.random() * MAX) + 1;
 
         while (hotels.length < total) {
-            const n = Math.floor(Math.random() * (this.num + 1));
-            const h = HOTELS[n];
-            if (!hotels.find(x => x.id === h.id)) {
-                h.distance = Math.floor(Math.random() * 50);
-                hotels.push(h);
+            const n = Math.floor(Math.random() * HOTELS.length);
+            const hotel = HOTELS[n];
+            if (!hotels.length || !hotels.find(h => h.id === hotel.id)) {
+                hotel.distance = Math.floor(Math.random() * 50) + 1;
+                hotels.push(hotel);
             }
         }
 
-        return of(hotels);
+        return of(hotels.sort((a, b) => a.distance === b.distance ? 0 : a.distance < b.distance ? -1 : 1));
     }
 }

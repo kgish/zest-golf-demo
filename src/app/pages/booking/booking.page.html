@@ -37,12 +37,9 @@
         </ion-card-content>
     </ion-card>
 
-    <ion-card>
-        <ion-card-header>
-            <ion-card-title>Hotels nearby</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            List of hotels goes here.
+    <ion-card class="hotels">
+        <ion-card-content *ngIf="facility">
+            <app-hotels [facilityId]="facility.id"></app-hotels>
         </ion-card-content>
     </ion-card>
 </ion-content>
