@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-
 #
-# ./heroku-deployment
+# ./heroku-deployment.sh
 #
 # Commit latest changes, push to heroku and then open browser.
 
