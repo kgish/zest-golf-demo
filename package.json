@@ -20,7 +20,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ionic:lab": "ionic serve -lab",
-     "postinstall": "ng build --aot -prod"
+     "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
