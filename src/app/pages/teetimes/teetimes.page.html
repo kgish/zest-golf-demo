@@ -34,7 +34,7 @@
                 <ion-item>
                     <ion-label>Players</ion-label>
                     <ion-select (ionChange)="changePlayers($event)" interface="popover">
-                        <ion-select-option *ngFor="let value of [1,2,3,4]" [selected]="value === +players"
+                        <ion-select-option *ngFor="let value of [1,2,3,4]" [selected]="value == players"
                                            [value]="value">{{value}}</ion-select-option>
                     </ion-select>
                 </ion-item>

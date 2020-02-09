@@ -20,7 +20,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ionic:lab": "ionic serve -lab",
-     "postinstall": "ng build --aot --prod"
+    "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
@@ -55,6 +55,7 @@
     "@angular/compiler-cli": "~8.1.2",
     "@angular/language-service": "~8.1.2",
     "@ionic/angular-toolkit": "^2.1.1",
+    "@ionic/lab": "^3.0.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
