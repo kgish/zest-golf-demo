@@ -19,7 +19,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "ionic:lab": "ionic start -lab"
+    "ionic:lab": "ionic serve -lab"
   },
   "private": true,
   "dependencies": {
