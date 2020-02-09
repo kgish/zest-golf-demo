@@ -16,11 +16,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --aot=true --prod=true",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ionic:lab": "ionic serve -lab",
-    "heroku-prebuild": "echo 'HEROKU-PREBUILD'&& npm install -g @angular/cli"
+    "heroku-prebuild": "echo 'HEROKU-PREBUILD'&& npm install -g @angular/cli @angular-devkit/build-angular"
   },
   "private": true,
   "dependencies": {
