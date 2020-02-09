@@ -20,7 +20,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ionic:lab": "ionic serve -lab",
-    "postinstall": "ng build --aot --prod"
+    "heroku-prebuild": "echo 'HEROKU-PREBUILD'",
+    "heroku-postbuild": "echo 'HEROKU-POSTBUILD' && ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
