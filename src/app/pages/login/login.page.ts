@@ -10,7 +10,7 @@ import { AuthService } from '../../services';
 })
 export class LoginPage implements OnInit {
 
-    private form: FormGroup;
+    form: FormGroup;
 
     constructor(private auth: AuthService,
                 private formBuilder: FormBuilder) {
