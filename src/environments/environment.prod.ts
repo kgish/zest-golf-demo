@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://sandbox-cm.zest.golf/api/v2'
+  apiUrl: 'https://sandbox-cm.zest.golf/api/v2',
+  googleKey: 'AIzaSyAZ9CxU_6LMRmvXv-IbmC5kzf1baAbDUus'
 };

@@ -33,12 +33,15 @@
                         {{ facility.address.zipcode }} {{ facility.address.place }}
                     </div>
                     <div>
-                        {{ facility.address.state }}, {{ facility.address.country }}
+                        {{ facility.address.state }} {{ facility.address.country }}
                     </div>
                 </div>
             </ion-card-header>
             <ion-card-content>
                 <ion-list>
+                    <ion-item>
+                        <iframe height="250" frameborder="0" style="border:0" [src]="googleUrl" allowfullscreen></iframe>
+                    </ion-item>
                     <ion-item *ngIf="facility.description">
                         {{facility.description }}
                     </ion-item>
